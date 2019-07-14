@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="/css/main.css" type="text/css" />
+  </head>
+  <body>
+    <h1><%= idiom.name %></h1>
+
+    <h3>Meaning</h3>
+    <ul>
+      <% for (var meaning in idiom.meanings){ %>
+      <li><%= idiom.meanings[meaning] %></li>
+      <%}%>
+    </ul>
+
+    <h3>Examples</h3>
+    <ul>
+      <% for (var example in idiom.examples){ %>
+      <li><%= idiom.examples[example] %></li>
+      <%}%>
+    </ul>
+
+    <h3>Origin</h3>
+    <p><%=idiom.origin %></p>
+  </body>
+</html>

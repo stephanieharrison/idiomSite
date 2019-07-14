@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <script src="/js/main.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <h1>Autocomplete Test!</h1>
+    <input id="input-box" type="text" />
+    <ul id="possible-matches"></ul>
+    <h1>Test?</h1>
+    <script>
+      console.log("Hello!");
+      var collection = "<%= idioms %>";
+      var input = document.querySelector("#input-box");
+      input.addEventListener("keypress", e => {
+        value = input.value + String.fromCharCode(e.keyCode);
+        console.log(value);
+        list = document.querySelector("#possible-matches");
+
+        const createList = value => {
+          if (value.length > 10) {
+            value = value.slice(0, 10);
+          }
+          value.forEach(item => {
+            listItem = document.createElement("li");
+            text = document.createTextNode(item.name);
+            listItem.appendChild(text);
+            list.appendChild(listItem);
+          });
+        };
+
+        const getIdioms = axios.get("/search/api/" + value);
+        getIdioms.then(value => {
+          list = document.querySelector("#possible-matches");
+          while (list.firstChild) {
+            list.removeChild(list.firstChild);
+          }
+          console.log(value.data);
+          createList(value.data);
+        });
+      });
+    </script>
+  </body>
+</html>
